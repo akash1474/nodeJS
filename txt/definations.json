@@ -1,0 +1,140 @@
+{
+    "physics": [{
+        "chapter":"wavetheoryoflight",
+        "topics": [{
+                "Title": "Wavefront",
+                "Defination": "It is the locus of all the points in the medium to which wave reaches simultaneously so that all the points are in the same pahse"
+            },
+            {
+                "Title": "Wavenormal",
+                "Defination": "The perpendicular drawn at any point on the wavefront that gives the direction of propagation of light is called as Wavenormal."
+            },
+            {
+                "Title":"Wave surface",
+                "Defination":"Surface of the sphere with centre as the source and radius as the distance covered by light in time t."
+            },
+            {
+                "Title":"Polaroid",
+                "Defination":"A large sheet of synthetic material pack with tiny crystals of dichromic substance oriented parallel to each other so that it transmits the light only in one direction of electric vector."
+            },
+            {
+                "Title":"Plane of polarised light",
+                "Defination":"The plane in which the electric vector of plane polarised light is vibrating is called as plane of polarised light."
+            },
+            {
+                "Title":"Plane of polarisation",
+                "Defination":"The plane perpendicular to plane of vibration is called as the plane of polarisation."
+            },
+            {
+                "Title":"Polarising angle",
+                "Defination":"The angle of incidence of an ordinary light at which reflected light from transparent medium is completely polarised is called as polarising angle."
+            },
+            {
+                "Title":"Breuester's law",
+                "Defination":"Tangent of polarising angle is equal to refractive index of transparent medium."
+            },
+            {
+                "Title":"Dichromism",
+                "Defination":"A phenomenon in which doubly refracting crystals absorb ordinary rays and the extra ordinary rays parallel to optic axis are allowed to pass is called as dichromism. eg Tormline crystal"
+            },
+            {
+                "Title":"Dopler effect",
+                "Defination":"The apprent change in frequency of light due to change in relative motion between source and observer is called as doppler effect."
+            },
+            {
+                "Title":"Uses of polaroid",
+                "Defination":"To remove car headlight glare,\n In 3D movies,\n To produce and analyse polarised light,\n Filter in photographic camera,\n In aeroplane windows to control the light,\n Polarising sunglasses to protect the eyes,\n To improve the colour contrast of the old painting,\n In calculators, laptops, moniters etc"
+            },
+            {
+                "Title":"Red shift",
+                "Defination":"When the source of light is receding away from the observer, then the frequency of light appears to be decreasing or the wavelength of light appears to be increasing to the observer. Therefore, the spectral line gets displaced towards red end."
+            },
+            {
+                "Title":"Blue shift",
+                "Defination":"When the source is approaching the observer, then the frequecy of light appears to be increasing or wavelength appears to be decreasing, ie the spectral line in electromagnetic spectrum gets displaced towards violet end."
+            }
+        ]
+    },
+    {
+        "chapter":"atomsmoleculesnuclei",
+        "topics":[
+            {
+                "Title":"Bohr's first postulate",
+                "Defination":"Electron revolves in circular orbit around nucleus with nucleus at the centre of orbit."
+            },
+            {
+                "Title":"Bohr's second postulate",
+                "Defination":"The electrons revolve around the nucleus only in those orbits for which the angular momentum is equal to an integral multiple of h/2pi."
+            },
+            {
+                "Title":"Bohr's third postulate",
+                "Defination":"When the electron jumps from orbit of high energy to obit of low energy then it radiates energy in the form of quanta  or photons."
+            },
+            {
+                "Title":"Series limit",
+                "Defination":"The smallest wavelength emitted in the given series is called as series limit."
+            },
+            {
+                "Title":"Isotopes",
+                "Defination":"Having same atomic number but different number of neutrons."
+            },
+            {
+                "Title":"Isotones",
+                "Defination":"Same number of neutronsbut different atomic number."
+            },
+            {
+                "Title":"Isobars",
+                "Defination":"Having same atomic mass number."
+            },
+            {
+                "Title":"Unified atomic mass",
+                "Defination":"It is 1/12 th mass of neutral carbon atom in its lowest energy state."
+            },
+            {
+                "Title":"Mass Defect",
+                "Defination":"It is the difference between mass of nucleons and actual mass of nucleus."
+            },
+            {
+                "Title":"Nuclear binding energy",
+                "Defination":"It is the minimum amount of energy required to seperate the nucleons from the nucleus."
+            },
+            {
+                "Title":"Radioactivity",
+                "Defination":"The spontaneous emission of radiations from radioactive substance is known as radioactivity."
+            },
+            {
+                "Title":"Properties of Alpha particles",
+                "Defination":"1.positively charged.\n2.deflected by electric and magnetic field.\n3.affects photgraphic plates.\n4.produces flourescence.\n 5.ionise the gas when passed.\n6.scattered when incident on mica, aluminium or gold foil."
+            },
+            {
+                "Title":"Properties of Beta particles",
+                "Defination":"1.are fast moving electrons from nucleus.\n2.deflected by electric and magnetic field.\n3.ionising power is less than alpha particles.\n4.more penetrating power than alpha particles.\n5.its speed ranges from 1 to 99% of speed of light.\n6.range depends on speed."
+            },
+            {
+                "Title":"Properties of Gamma particles",
+                "Defination":"1.They are not particles but electromagnetic waves of short wavelengths.\n2.They are photons originating from the nucleus.\n3.They are neutral and hence not affected by electric or magnetic field.\n4.Affects photographic plates and produces fluorescence.\n5.Have very low ionization power than alpha particles.\n6.Have very high penetrating power can pass through 25cm iron.\n7.Are deflected by crystals."
+            },
+            {
+                "Title":"Decay law",
+                "Defination":"Number of nuclei disintegrated per unit time is directly proportional to number of nuclei present at that time."
+            },
+            {
+                "Title":"Decay constant",
+                "Defination":"It is the ratio of amount of substance disintegrated per unit time to amount of substance present at that time."
+            },
+            {
+                "Title":"Half life period(T)",
+                "Defination":"Amount of time required to disintegrate half the initial amount."
+            },
+            {
+                "Title":"Nuclear fission",
+                "Defination":"The process of splitting of heavier nucleus into small fragments."
+            },
+            {
+                "Title":"Nuclear fusion",
+                "Defination":"The process of fusion of two lighter nuclei to form a heavier nuclei is called as nuclear fussion."
+            }
+        ]
+    }
+    ]
+}
