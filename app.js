@@ -1,6 +1,12 @@
 /* eslint-disable prettier/prettier */
 const express = require('express');
 const morgan = require('morgan');
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
+const hpp = require('hpp');
+
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
@@ -9,8 +15,41 @@ app.use(express.static(`${__dirname}/public`));
 const tourRouter = require('./routes/tourRouters');
 const userRouter = require('./routes/userRouters');
 
-app.use(express.json());
-app.use(morgan('dev'));
+//CHECK THE DEVELOPMENT
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
+
+//SET HTTP HEADERS
+app.use(helmet());
+
+//LIMIT REQUEST FORM SAME IP
+const limiter = rateLimit({
+  max: 5,
+  windowMs: 60 * 60 * 1000,
+  message: 'To many request form one IP Please try again after an hour',
+});
+app.use('/api', limiter);
+//BODY PARSER PARSES THE REQ.BODY
+app.use(express.json({ limit: '10kb' }));
+
+//DATA SANITIZATION AGAINST NOSEQL QUERY INJECTION
+app.use(mongoSanitize());
+//DATA SANITIZTION AGAINST XSS
+app.use(xss());
+//PREVENT PARAMETER POLLUTION
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'ratingsQuantity',
+      'ratingsAverage',
+      'maxGroupSize',
+      'difficulty',
+      'price',
+    ],
+  })
+);
 // app.use((req, res, next) => {
 //   console.log(req.headers);
 //   next();
