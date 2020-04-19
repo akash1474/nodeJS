@@ -1,46 +1,41 @@
 const mongoose = require('mongoose');
-const express = require('express');
-
-const app = express();
 const dotenv = require('dotenv');
 const fs = require('fs');
-const Tour = require('./model');
+const Tour = require('./models/tourModel');
 
 dotenv.config({ path: './config.env' });
-
+const LDB = process.env.DATABASE_LOCAL;
 mongoose
-  .connect(process.env.DATABASE_LOCAL, {
-    useFindAndModify: true,
-    useUnifiedTopology: true,
+  .connect(LDB, {
     useNewUrlParser: true,
     useCreateIndex: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
   })
   .then(() => {
-    console.log('Database Connection Established');
+    console.log('Database connection established!!');
   })
-  .catch((err) => {
-    console.log(err);
-  });
+  .catch((err) => console.log(err));
 
-const info = JSON.parse(
+const data = JSON.parse(
   fs.readFileSync('./dev-data/data/tours-simple.json', 'utf-8')
 );
 
 const importData = async () => {
   try {
-    await Tour.create(info);
-    console.log('Data Import Successfull');
-    process.exit(1);
+    console.log('here');
+    await Tour.create(data);
+    console.log('Data import successfull!!!');
+    process.exit();
   } catch (err) {
     console.log(err);
   }
 };
-
 const deleteData = async () => {
   try {
     await Tour.deleteMany();
-    console.log('Database Deletion successfull');
-    process.exit(1);
+    console.log('Data deletion successfull!!!');
+    process.exit();
   } catch (err) {
     console.log(err);
   }
@@ -51,6 +46,3 @@ if (process.argv[2] === '--import') {
 } else if (process.argv[2] === '--delete') {
   deleteData();
 }
-app.listen(300, 'localhost', () => {
-  console.log('Server Started');
-});
