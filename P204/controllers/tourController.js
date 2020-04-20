@@ -4,17 +4,23 @@ const AppError = require('../utils/appError');
 const APIFeatures = require('../utils/apiFeatures');
 
 exports.getAllTours = catchAsync(async (req, res, next) => {
-  //WORK ON APIFEATURES
-  const features = await new APIFeatures(Tour.find(), req.query)
-    .sort()
+  const features = new APIFeatures(Tour.find(), req.query)
     .filter()
+    .sort()
     .fieldLimiting()
-    .pagination();
+    .paginate();
 
   const tours = await features.query;
+  let page = req.query.page * 1 || 1;
+  if (page === 0) {
+    page = 1;
+  }
+  // req.query.page * 1 ? (0 ? 1 : req.query.page * 1) : req.query.page * 1;
+  console.log(page);
   res.status(200).json({
     status: 'success',
     results: tours.length,
+    page: page,
     data: {
       tours,
     },
@@ -24,9 +30,8 @@ exports.getAllTours = catchAsync(async (req, res, next) => {
 exports.getTour = catchAsync(async (req, res, next) => {
   const tour = await Tour.findById(req.params.id);
   if (!tour) {
-    return next(new AppError('The entered ID did not match to any!!!', 404));
+    return next(new AppError('Provided ID did not matched!!!', 400));
   }
-
   res.status(200).json({
     status: 'success',
     data: {
@@ -34,15 +39,25 @@ exports.getTour = catchAsync(async (req, res, next) => {
     },
   });
 });
-
 exports.updateTour = catchAsync(async (req, res, next) => {
   const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
   });
-
-  if (!tour) next(new AppError('The entered ID didnot match to any!!!', 404));
-
+  console.log(tour);
+  if (!tour) {
+    return next(new AppError('The entered ID did not match to any!!!', 404));
+  }
+  res.status(200).json({
+    status: 'success',
+    data: {
+      tour,
+    },
+  });
+});
+exports.createTour = catchAsync(async (req, res, next) => {
+  const tour = await Tour.create(req.body);
+  console.log(req.body);
   res.status(201).json({
     status: 'success',
     data: {
@@ -53,20 +68,11 @@ exports.updateTour = catchAsync(async (req, res, next) => {
 
 exports.deleteTour = catchAsync(async (req, res, next) => {
   const tour = await Tour.findByIdAndDelete(req.params.id);
-  if (!tour) next(new AppError('The entered ID didnot match to any!!!', 404));
+  if (!tour) {
+    return next(new AppError('Some Error occured!!!', 404));
+  }
   res.status(204).json({
     status: 'success',
     data: null,
-  });
-});
-
-exports.createTour = catchAsync(async (req, res, next) => {
-  const tour = await Tour.create(req.body);
-  if (!tour) next(new AppError('The entered ID didnot match to any!!!', 404));
-  res.status(201).json({
-    status: 'success',
-    data: {
-      tour,
-    },
   });
 });

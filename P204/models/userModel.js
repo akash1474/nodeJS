@@ -1,6 +1,7 @@
+// const crypto = require('crypto');
 const mongoose = require('mongoose');
-const validator = require('validator');
 const bcrypt = require('bcryptjs');
+const validator = require('validator');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -49,27 +50,24 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.pre('save', async function (next) {
-  //Only run this fn if the password was modified
   if (!this.isModified('password')) return next();
-  //Hashing the password
+
   this.password = await bcrypt.hash(this.password, 12);
-  //Clearing the passwordConfirm
   this.passwordConfirm = undefined;
   next();
 });
 
-userSchema.methods.correctPassword = function (canditatePass, userPasss) {
-  return bcrypt.compare(canditatePass, userPasss);
+userSchema.methods.checkPassword = async function (providedPass, userPass) {
+  return await bcrypt.compare(providedPass, userPass);
 };
 
-userSchema.methods.changedPasswordAfter = function (JWTTimeStamp) {
+userSchema.methods.passwordChangedAfter = async function (JWTTimeStamp) {
   if (this.passwordChangedAt) {
-    const changedTimeStamp = (this.passwordChangedAt.getTime() / 1000, 10);
-    return JWTTimeStamp < changedTimeStamp;
+    return parseInt(this.passwordChangedAt.getTime() / 1000, 10) > JWTTimeStamp;
   }
   return false;
 };
 
-const userModel = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
 
-module.exports = userModel;
+module.exports = User;

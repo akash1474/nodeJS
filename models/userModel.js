@@ -33,6 +33,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please confirm the password'],
     validate: {
+      //RUNS ONLY WHILE SAVING
       validator: function (el) {
         return el === this.password;
       },

@@ -1,19 +1,19 @@
-const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const mongoose = require('mongoose');
 const fs = require('fs');
 const Tour = require('./models/tourModel');
 
 dotenv.config({ path: './config.env' });
-const LDB = process.env.DATABASE_LOCAL;
+
 mongoose
-  .connect(LDB, {
+  .connect(process.env.DATABASE_LOCAL, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log('Database connection established!!');
+    console.log('Database Connectin Successfull!!!');
   })
   .catch((err) => console.log(err));
 
@@ -23,9 +23,8 @@ const data = JSON.parse(
 
 const importData = async () => {
   try {
-    console.log('here');
     await Tour.create(data);
-    console.log('Data import successfull!!!');
+    console.log('Data Import Successfull!!!');
     process.exit();
   } catch (err) {
     console.log(err);
@@ -34,7 +33,7 @@ const importData = async () => {
 const deleteData = async () => {
   try {
     await Tour.deleteMany();
-    console.log('Data deletion successfull!!!');
+    console.log('Data Deletion Successfull!!!');
     process.exit();
   } catch (err) {
     console.log(err);
