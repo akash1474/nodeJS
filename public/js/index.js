@@ -19,13 +19,18 @@ if (loginForm) {
 
 if (logOutBtn) logOutBtn.addEventListener('click', logout);
 
-if (userDataForm)
+if (userDataForm) {
   userDataForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const email = document.getElementById('email').value;
-    const name = document.getElementById('name').value;
-    updateSettings({ name, email }, 'data');
+    const form = new FormData();
+    form.append('name', document.getElementById('name').value);
+    form.append('email', document.getElementById('email').value);
+    console.log(document.getElementById('photo').files[0]);
+    form.append('photo', document.getElementById('photo').files[0]);
+    console.log(form);
+    updateSettings(form, 'data');
   });
+}
 
 if (userPasswordForm)
   document.querySelector('.btn--save-password').textContent = 'Updating...';
