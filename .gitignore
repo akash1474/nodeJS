@@ -4,5 +4,3 @@ node_modules/
 Practices/
 test/
 templates/
-public/js/bundle.js
-public/js/bundle.js.map
