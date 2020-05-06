@@ -209,7 +209,6 @@ tourSchema.post(/^find/, function (docs, next) {
 //EXECUTED BEFORE[.pre] AND AFTER[.post] THE AGGRATION MIDDLEWARE
 tourSchema.pre('aggregate', function (next) {
   this.pipeline().unshift({ $match: { secretTour: { $ne: true } } }); //removing the document having the secret documnet
-  console.log(this.pipeline());
   next();
 });
 const Tour = mongoose.model('Tour', tourSchema);

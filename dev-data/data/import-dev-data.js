@@ -9,7 +9,6 @@ const Review = require('../../models/reviewModel');
 
 dotenv.config({ path: './config.env' });
 const DB = process.env.DATABASE2.replace('<PASSWORD>', process.env.PASSWORD);
-console.log(DB);
 // const LDB = process.env.DATABASE_LOCAL;
 mongoose
   .connect(
@@ -58,11 +57,7 @@ const deleteData = async () => {
   }
 };
 if (process.argv[2] === '--import') {
-  console.log('UPLOADING FILES...');
   ImportData();
 } else if (process.argv[2] === '--delete') {
-  console.log('DELETING FILES...');
   deleteData();
 }
-
-console.log(process.argv); //gives info about the node and file locatoins

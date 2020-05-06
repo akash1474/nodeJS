@@ -7,7 +7,7 @@
     "start": "nodemon server",
     "debug": "ndb server.js",
     "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
-    "practice:js": "parcel watch ./P53FileUpload/public/app.js --out-dir ./P53FileUpload/public/ --out-file bundle.js"
+    "build:js": "parcel build ./public/js/index.js --out-dir ./public/js --out-file bundle.js"
   },
   "author": "Akash Pandit",
   "license": "ISC",

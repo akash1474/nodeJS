@@ -42,7 +42,6 @@ exports.signUp = catchAsync(async (req, res, next) => {
   });
 
   const url = `${req.portocol}://${req.get('host')}/me`;
-  console.log(url);
   await new Email(newUser, url).sendWelcome();
 
   createSendToken(newUser, 201, res);

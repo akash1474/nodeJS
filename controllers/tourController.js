@@ -41,8 +41,6 @@ exports.uploadTourImages = upload.fields([
 ]);
 
 exports.resizeImages = catchAsync(async (req, res, next) => {
-  console.log(req.files);
-
   if (!req.files.imageCover || !req.files.images) return next();
 
   //Cover image
@@ -323,8 +321,6 @@ exports.getToursWithin = catchAsync(async (req, res, next) => {
   const radius = unit === 'mi' ? distance / 3963.2 : distance / 6378.1;
   if (!lat || !lng)
     next(new AppError(`Please provide latitude and logitude`, 400));
-
-  console.log(distance, lat, lng, unit);
 
   const tours = await Tour.find({
     startLocation: { $geoWithin: { $centerSphere: [[lng, lat], radius] } },
