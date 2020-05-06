@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
 // const fs = require('fs');
+const multer = require('multer');
+const sharp = require('sharp');
 
 const Tour = require('../models/tourModel');
 // const APIFeatures = require('../utils/apiFeatures');
@@ -9,6 +11,69 @@ const handlerFactory = require('./handlerFactory');
 // const tours = JSON.parse(
 //   fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`)
 // );
+
+//Storing the file as a buffer
+const multerStorage = multer.memoryStorage();
+
+const multerFilter = (req, file, cb) => {
+  //Allowing only the files that are images
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  } else {
+    cb(
+      new AppError(
+        `The uploaded file is not an image!! Please upload an image file`,
+        400
+      ),
+      false
+    );
+  }
+};
+
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter,
+});
+
+exports.uploadTourImages = upload.fields([
+  { name: 'imageCover', maxCount: 1 },
+  { name: 'images', maxCount: 3 },
+]);
+
+exports.resizeImages = catchAsync(async (req, res, next) => {
+  console.log(req.files);
+
+  if (!req.files.imageCover || !req.files.images) return next();
+
+  //Cover image
+  req.body.imageCover = `tour-${req.params.id}-${Date.now()}-cover.jpeg`;
+  await sharp(req.files.imageCover[0].buffer)
+    .resize(2000, 1333)
+    .toFormat('jpeg')
+    .jpeg({ quality: 90 })
+    .toFile(`public/img/tours/${req.body.imageCover}`);
+
+  //imges
+  req.body.images = [];
+
+  await Promise.all(
+    req.files.images.map(async (file, i) => {
+      const filename = `tour-${req.params.id}-${Date.now()}-${i + 1}.jpeg`;
+      await sharp(file.buffer)
+        .resize(2000, 1333)
+        .toFormat('jpeg')
+        .jpeg({ quality: 90 })
+        .toFile(`public/img/tours/${filename}`);
+
+      req.body.images.push(filename);
+    })
+  );
+  next();
+});
+
+// upload.single('images');
+// Multiple file uploads with same field
+// upload.array('fieldName',MaxCountNum)
 
 exports.checkId = (req, res, next, val) => {
   // if (req.params.id * 1 > tours.length) {

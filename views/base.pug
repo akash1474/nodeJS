@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 html(lang="en")
     head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        link(rel="stylesheet", href="/css/style.css")
-        link(rel="shortcut icon", href="img/favicon.png", type="image/png")
-        link(href="https://fonts.googleapis.com/css?family=Lato:300,300i,700"
-      rel="stylesheet")
-        title Natours | #{title}
+        block head
+            meta(charset="UTF-8")
+            meta(name="viewport", content="width=device-width, initial-scale=1.0")
+            link(rel="stylesheet", href="/css/style.css")
+            link(rel="shortcut icon", href="img/favicon.png", type="image/png")
+            link(href="https://fonts.googleapis.com/css?family=Lato:300,300i,700"
+            rel="stylesheet")
+            title Natours | #{title}
     body
         //header
         include _header
@@ -21,4 +22,5 @@ html(lang="en")
 
         //- script(src="/js/axios.min.js")
         //- script(src="/js/login.js")
+        script(src="https://js.stripe.com/v3/")
         script(src="/js/bundle.js")
