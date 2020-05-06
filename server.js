@@ -18,10 +18,10 @@ dotenv.config({ path: './config.env' });
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
-// const DB = process.env.DATABASE2.replace('<PASSWORD>', process.env.PASSWORD);
-const LDB = process.env.DATABASE_LOCAL;
+const DB = process.env.DATABASE2.replace('<PASSWORD>', process.env.PASSWORD);
+// const LDB = process.env.DATABASE_LOCAL;
 mongoose
-  .connect(LDB, {
+  .connect(DB, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
